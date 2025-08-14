@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet Adoption Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover { background-color: #45a049; }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e6ffe6;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Adoption Form</h2>
+    <form id="adoptionForm">
+        <label>Pet name:</label>
+        <input type="text" id="petName" required>
+        
+
+        <label>Your Name:</label>
+        <input type="text" id="applicantName" required>
+
+        <label>Email:</label>
+        <input type="email" id="email" required>
+
+        <label>Reason for Adoption:</label>
+        <textarea id="reason" required></textarea>
+
+        <button type="submit">"Submit Adoption Request"</button>
+    </form>
+
+    <div id="result" class="result" style="display:none;"></div>
+</div>
+
+<script>
+    // Random pet facts
+    const petFacts = [
+        "Pets can improve your mental health!",
+        "Dogs can learn more than 100 words.",
+        "Cats sleep for about 13–16 hours a day.",
+        "Birds have hollow bones that help them fly.",
+        "Rabbits can turn their ears 180 degrees."
+    ];
+
+    // Load pet name from localStorage
+    document.getElementById("petName").value = localStorage.getItem("selectedPet");
+
+    document.getElementById("adoptionForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let petName = document.getElementById("petName").value;
+        let name = document.getElementById("applicantName").value;
+        let email = document.getElementById("email").value;
+        let reason = document.getElementById("reason").value;
+
+        let requestNumber = Math.floor(Math.random() * 100000);
+        let randomFact = petFacts[Math.floor(Math.random() * petFacts.length)];
+
+        document.getElementById("result").innerHTML = `
+            <h3>Adoption Request Submitted</h3>
+            <p><strong>Pet Name:</strong> ${petName}</p>
+            <p><strong>Applicant Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Reason:</strong> ${reason}</p>
+            <p><strong>Request Number:</strong> ${requestNumber}</p>
+            <p><strong>Random Pet Fact:</strong> ${randomFact}</p>
+        `;
+        document.getElementById("result").style.display = "block";
+    });
+</script>
+
+</body>
+</html>
